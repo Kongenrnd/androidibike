@@ -40,5 +40,21 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         mMap.addMarker(MarkerOptions().position(myPlace).title("台中歌劇院"))
         mMap.moveCamera(CameraUpdateFactory.newLatLng(myPlace))
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(myPlace, 16.0f))
+        val taipie101 = LatLng(25.033611, 121.565000)
+        val markOpt = MarkerOptions()
+        markOpt.position(taipie101)
+        markOpt.title("台北101")
+        markOpt.draggable(true)
+        markOpt.infoWindowAnchorU
+        mMap.addMarker(markOpt)
+        mMap.setOnCircleClickListener {
+            mMap.setInfoWindowAdapter()
+        }
+
+
     }
+}
+
+private fun GoogleMap.setInfoWindowAdapter() {
+    TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
 }
