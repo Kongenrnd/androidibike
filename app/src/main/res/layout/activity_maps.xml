@@ -12,11 +12,12 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
     <com.google.android.material.navigation.NavigationView
+        android:id="@+id/design_navigation_view"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_gravity="start"
         app:headerLayout="@layout/nav_header"
-        app:menu="@menu/drawer_view">
+        app:menu="@menu/drawerview">
     </com.google.android.material.navigation.NavigationView>
 
     <fragment xmlns:android="http://schemas.android.com/apk/res/android"

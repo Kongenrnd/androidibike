@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="@layout/nav_header"
+    >
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/new_nav_map"
+            android:checkable="true"
+            android:icon="@drawable/hospital"
+            android:title="Map" />
+        <item
+            android:id="@+id/new_nav_web"
+            android:checkable="true"
+            android:icon="@drawable/www"
+            android:title="web" />
+        <item
+            android:id="@+id/new_nav_detail"
+            android:checkable="true"
+            android:icon="@drawable/internet"
+            android:title="detail" />
+    </group>
+
+</menu>

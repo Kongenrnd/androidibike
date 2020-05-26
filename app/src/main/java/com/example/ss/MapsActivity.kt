@@ -58,6 +58,9 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback,
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_maps)
+
+        val navigationview : NavigationView = findViewById(R.id.design_navigation_view)
+        navigationview.setNavigationItemSelectedListener(this)
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         val mapFragment = supportFragmentManager
             .findFragmentById(R.id.map) as SupportMapFragment
@@ -190,8 +193,14 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback,
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         when(item.itemId){
-            R.id.nav_website ->{
-                Toast.makeText(this,"website",Toast.LENGTH_LONG).show()
+            R.id.new_nav_map ->{
+                Toast.makeText(this,"nav_map--------------",Toast.LENGTH_LONG).show()
+            }
+            R.id.new_nav_web ->{
+                Toast.makeText(this,"website---------------",Toast.LENGTH_LONG).show()
+            }
+            R.id.new_nav_detail ->{
+                Toast.makeText(this,"detail----------------",Toast.LENGTH_LONG).show()
             }
         }
         drawer_layout.closeDrawer(GravityCompat.START)
