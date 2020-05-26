@@ -9,9 +9,13 @@ import android.location.LocationManager
 import android.nfc.Tag
 import android.os.Bundle
 import android.util.Log
+import android.view.Gravity
+import android.view.MenuItem
 import android.widget.Button
 import android.widget.EditText
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.GravityCompat
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
@@ -20,11 +24,13 @@ import com.google.android.gms.maps.model.BitmapDescriptor
 import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
+import com.google.android.material.navigation.NavigationView
 //import sun.jvm.hotspot.utilities.IntArray
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import java.util.concurrent.ExecutorService
 import com.squareup.okhttp.*
+import kotlinx.android.synthetic.main.activity_maps.*
 import org.json.JSONArray
 import org.w3c.dom.DOMStringList
 import java.io.IOException
@@ -33,7 +39,7 @@ import java.util.concurrent.Executors
 
 
 class MapsActivity : AppCompatActivity(), OnMapReadyCallback,
-    GoogleMap.OnMyLocationButtonClickListener, LocationListener {
+    GoogleMap.OnMyLocationButtonClickListener, LocationListener ,NavigationView.OnNavigationItemSelectedListener{
     private lateinit var service: ExecutorService
     private lateinit var client: OkHttpClient
     private lateinit var mMap: GoogleMap
@@ -115,8 +121,6 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback,
                         list2.add(json.Y.toString().toDouble())
                         AvailableCNT.add(json.AvailableCNT.toString())
                         EmpCNT.add(json.EmpCNT.toString())
-//aaas
-                        //aaaas
 
                     }
                     for (i in 0..list1.size - 2) {
@@ -181,6 +185,17 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback,
     }
 
     override fun onProviderDisabled(provider: String?) {
+
+    }
+
+    override fun onNavigationItemSelected(item: MenuItem): Boolean {
+        when(item.itemId){
+            R.id.nav_website ->{
+                Toast.makeText(this,"website",Toast.LENGTH_LONG).show()
+            }
+        }
+        drawer_layout.closeDrawer(GravityCompat.START)
+        return true
 
     }
 }
