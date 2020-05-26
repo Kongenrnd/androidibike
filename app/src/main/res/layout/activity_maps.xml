@@ -16,13 +16,6 @@
 
         />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:layout_width="128dp"
-        android:layout_height="598dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/map"
-        app:layout_constraintTop_toTopOf="parent" />
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 
