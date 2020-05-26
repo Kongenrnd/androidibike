@@ -116,7 +116,8 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback,
                         AvailableCNT.add(json.AvailableCNT.toString())
                         EmpCNT.add(json.EmpCNT.toString())
 //aaas
-                        
+                        //aaaas
+
                     }
                     for (i in 0..list1.size - 2) {
                         mMap.addMarker(
