@@ -43,6 +43,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback,
     private lateinit var service: ExecutorService
     private lateinit var client: OkHttpClient
     private lateinit var mMap: GoogleMap
+    //val locationManager = getSystemService(Context.LOCATION_SERVICE)
     var list1 = ArrayList<Double>()
     var list2 = ArrayList<Double>()
     var AvailableCNT = ArrayList<String>()
@@ -157,12 +158,10 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback,
      */
     override fun onMapReady(googleMap: GoogleMap) {
         mMap = googleMap
+        //locationManager
         mMap.addMarker(MarkerOptions().position(myself_gps).title("我的位置"))
         mMap.moveCamera(CameraUpdateFactory.newLatLng(myself_gps))
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(myself_gps, 15.0f))
-
-        handleJson()
-
         mMap.setOnCircleClickListener {
         }
     }
