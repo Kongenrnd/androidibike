@@ -5,8 +5,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/drawer_layout"
-    android:layout_height="match_parent"
-    android:layout_width="match_parent">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
 
     <fragment xmlns:android="http://schemas.android.com/apk/res/android"
@@ -19,17 +19,17 @@
         tools:context=".MapsActivity"
 
         />
+
+
+
+
     <com.google.android.material.navigation.NavigationView
         android:id="@+id/design_navigation_view"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_gravity="start"
         app:headerLayout="@layout/nav_header"
-        app:menu="@menu/drawerview">
-    </com.google.android.material.navigation.NavigationView>
-
-
-
+        app:menu="@menu/drawerview"></com.google.android.material.navigation.NavigationView>
 
 
 </androidx.drawerlayout.widget.DrawerLayout>

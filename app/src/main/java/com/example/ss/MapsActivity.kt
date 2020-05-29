@@ -16,6 +16,8 @@ import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
+import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
@@ -31,6 +33,11 @@ import com.google.gson.reflect.TypeToken
 import java.util.concurrent.ExecutorService
 import com.squareup.okhttp.*
 import kotlinx.android.synthetic.main.activity_maps.*
+import kotlinx.android.synthetic.main.detailview.*
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import org.json.JSONArray
 import org.w3c.dom.DOMStringList
 import java.io.IOException
@@ -43,9 +50,12 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback,
     private lateinit var service: ExecutorService
     private lateinit var client: OkHttpClient
     private lateinit var mMap: GoogleMap
+    private lateinit var adapter: Adapter
+    private val WebFragment = fragment()
     //val locationManager = getSystemService(Context.LOCATION_SERVICE)
     var list1 = ArrayList<Double>()
     var list2 = ArrayList<Double>()
+    var CAdress = ArrayList<String>()
     var AvailableCNT = ArrayList<String>()
     var EmpCNT = ArrayList<String>()
     var Position = ArrayList<String>()
@@ -59,7 +69,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback,
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_maps)
-
+        //addFragment(WebFragment)
         val navigationview : NavigationView = findViewById(R.id.design_navigation_view)
         navigationview.setNavigationItemSelectedListener(this)
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
@@ -91,7 +101,17 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback,
         handleJson()
 
     }
+    private fun addFragment(f: Fragment) {
+        val transaction = supportFragmentManager.beginTransaction()
+        transaction.add(R.id.webview, f)
+        transaction.commit()
+    }
 
+    private fun replaceFragment(f : Fragment){
+        val transaction = supportFragmentManager.beginTransaction()
+        transaction.replace(R.id.webview, f)
+        transaction.commit()
+    }
     private fun initData() {
         client = OkHttpClient()
         service = Executors.newSingleThreadExecutor()
@@ -125,6 +145,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback,
                         list2.add(json.Y.toString().toDouble())
                         AvailableCNT.add(json.AvailableCNT.toString())
                         EmpCNT.add(json.EmpCNT.toString())
+                        CAdress.add(json.CAddress.toString())
 
                     }
                     for (i in 0..list1.size - 2) {
@@ -196,10 +217,23 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback,
                 Toast.makeText(this,"nav_map--------------",Toast.LENGTH_LONG).show()
             }
             R.id.new_nav_web ->{
-                Toast.makeText(this,"website---------------",Toast.LENGTH_LONG).show()
+                replaceFragment(WebFragment)
+//                Toast.makeText(this,"website---------------",Toast.LENGTH_LONG).show()
             }
             R.id.new_nav_detail ->{
-                Toast.makeText(this,"detail----------------",Toast.LENGTH_LONG).show()
+                CoroutineScope(Dispatchers.IO).launch {
+                    val json = URL("http://e-traffic.taichung.gov.tw/DataAPI/api/YoubikeAllAPI").readText()
+                    val bikeresult = Gson().fromJson<List<JsonData>>(json, object : TypeToken<List<JsonData>>() {}.type)
+                }
+                CoroutineScope(Dispatchers.IO).launch {
+                    //expenses = expenseDatabase.expenseDao().getAll()
+                    withContext(Dispatchers.Main){
+//                        recycler_detail.setHasFixedSize(true)
+//                        recycler_detail.layoutManager = LinearLayoutManager(this@MapsActivity)
+//                        adapter = Adapter(JsonData)
+//                        recycler_detail.adapter = adapter
+                    }
+                }
             }
         }
         drawer_layout.closeDrawer(GravityCompat.START)
